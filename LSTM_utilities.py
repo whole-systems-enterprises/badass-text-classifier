@@ -18,6 +18,8 @@ from sklearn.metrics import roc_curve, auc
 #
 def compute_and_plot_ROC(y_known, y_score, filename):
 
+    import matplotlib.pyplot as plt
+
     y_known = [int(x) for x in y_known]
 
     # crude
@@ -25,17 +27,16 @@ def compute_and_plot_ROC(y_known, y_score, filename):
     for s in y_score:
         y_score_list.append(s[0])
 
-    import matplotlib.pyplot as plt
-    fpr, tpr = roc_curve(y_known, y_score_list)
+    fpr, tpr, thresholds = roc_curve(y_known, y_score_list)
     roc_auc = auc(fpr, tpr)
     plt.figure()
-    plt.plot(fpr, tpr, color='darkorange', lw=lw, label='ROC Curve (Area = %0.2f)' % roc_auc)
-    plt.plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')
+    plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC Curve (Area = %0.2f)' % roc_auc)
+    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.title('Receiver operating characteristic example')
+    plt.title('Receiver Operating Characteristic')
     plt.legend(loc="lower right")
     plt.savefig(filename)
     plt.close()

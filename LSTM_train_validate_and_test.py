@@ -38,18 +38,16 @@ embeddings_to_try = ['learned']
 MODEL_CP_DIR = output_directory + '/checkpoints'
 TENSORBOARD_BASE_DIR = output_directory + '/tensorboard'
 
-epochs = 2
+epochs = 10
 
 #
 # crudely clear the way
 #
 os.system('rm -R ' + output_directory)
 os.system('mkdir ' + output_directory)
-os.system('rm -R ' + MODEL_CP_DIR)
 os.system('mkdir ' + MODEL_CP_DIR)
 os.system('mkdir ' + MODEL_CP_DIR + '/weights')
 os.system('mkdir ' + MODEL_CP_DIR + '/images')
-os.system('rm -R ' + TENSORBOARD_BASE_DIR)
 os.system('mkdir ' + TENSORBOARD_BASE_DIR)
 
 #
