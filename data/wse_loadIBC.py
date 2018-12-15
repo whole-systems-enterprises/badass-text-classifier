@@ -1,5 +1,10 @@
 import _pickle as cPickle
 
+#
+# user settings
+#
+output_directory = 'output'
+
 if __name__ == '__main__':
     [lib, con, neutral] = cPickle.load(open('ibcData.pkl', 'rb'))
 
@@ -32,8 +37,8 @@ if __name__ == '__main__':
     #
     # write contents to files
     #
-    f_x = open('output/x_full.txt', 'w')
-    f_y = open('output/y_full.txt', 'w')
+    f_x = open(output_directory + '/x_full.txt', 'w')
+    f_y = open(output_directory + '/y_full.txt', 'w')
     for tree in lib:
         f_x.write(tree.get_words() + '\n')
         f_y.write('0' + '\n')
