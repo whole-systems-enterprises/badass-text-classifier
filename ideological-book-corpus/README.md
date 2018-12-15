@@ -4,7 +4,7 @@ I got this data from https://github.com/klcoltin/Classification-of-News-Articles
 
 ## Reference
 
-Yanchuan Sim, Brice Acree, Justin Gross, and Noah Smith. Measuring Ideological Proportions in Political Speeches.Empirical Methods in Natural Language Processing, 2013.
+Yanchuan Sim, Brice Acree, Justin Gross, and Noah Smith. Measuring Ideological Proportions in Political Speeches. Empirical Methods in Natural Language Processing, 2013.
 
 https://www.cs.cmu.edu/~nasmith/papers/sim+acree+gross+smith.emnlp13.pdf
 
