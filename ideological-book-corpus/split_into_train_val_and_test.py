@@ -8,6 +8,8 @@ import pprint as pp
 #
 # user settings
 #
+random.seed(400523)
+
 output_directory = 'output'
 
 train_val_test_proportion = {

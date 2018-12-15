@@ -16,3 +16,8 @@ python3 wse_loadIBC.py
 
 python3 split_into_train_val_and_test.py
 
+## Output
+
+If you run this code, you will find in the output directory files containing X- and Y- values for the full set, a test set, a training set, and a validation set. Change the random seed in "split_into_train_val_and_test.py" to get different selections.
+
+
