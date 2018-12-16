@@ -71,6 +71,16 @@ def load_x_and_y_lists(x_list_filename, y_list_filename):
     return x_list, y_list
 
 
+def load_x_list(x_list_filename):
+    x_list = []
+    f = open(x_list_filename)
+    for line in f:
+        line = line.strip()
+        x_list.append(line)
+    f.close()
+    return x_list
+
+
 #
 # index GloVe embeddings
 #
