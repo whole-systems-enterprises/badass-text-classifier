@@ -18,13 +18,22 @@ import LSTM_utilities as ut
 #
 # user settings
 #
-output_directory = 'LSTM_output_IBC'
-x_train_filename = 'ideological-book-corpus/output/x_train.txt'
-y_train_filename = 'ideological-book-corpus/output/y_train.txt'
-x_val_filename = 'ideological-book-corpus/output/x_val.txt'
-y_val_filename = 'ideological-book-corpus/output/y_val.txt'
-x_test_filename = 'ideological-book-corpus/output/x_test.txt'
-y_test_filename = 'ideological-book-corpus/output/y_test.txt'
+
+# output_directory = 'LSTM_output_IBC'
+# x_train_filename = 'ideological-book-corpus/output/x_train.txt'
+# y_train_filename = 'ideological-book-corpus/output/y_train.txt'
+# x_val_filename = 'ideological-book-corpus/output/x_val.txt'
+# y_val_filename = 'ideological-book-corpus/output/y_val.txt'
+# x_test_filename = 'ideological-book-corpus/output/x_test.txt'
+# y_test_filename = 'ideological-book-corpus/output/y_test.txt'
+
+output_directory = 'LSTM_output_2016'
+x_train_filename = 'output/x_train.txt'
+y_train_filename = 'output/y_train.txt'
+x_val_filename = 'output/x_val.txt'
+y_val_filename = 'output/y_val.txt'
+x_test_filename = 'output/x_test.txt'
+y_test_filename = 'output/y_test.txt'
 
 output_scores_file = 'scores.pickled'
 
