@@ -42,6 +42,12 @@ where "train", "val", and "tests" correspond to your training, validation, and t
 
 Deciding how to split your data set is somewhat of an art; I typically use 80% for training, and 10% each for validation and testing. However, this is just my habit, not a rigorous recommendation.
 
+## Training
+
+```
+python3 LSTM_train_validate_and_test.py --output-directory output --input-file-directory input --max-sequence-length 1000 --number-of-layers-to-try 1,2,3 --number-of-cells-to-try 10,15,30,70,128,200 --epochs 100 --embeddings-to-try learned,GloVe --GloVe-file /Users/emily/Desktop/data/NLP/GloVe/glove.6B.100d.txt
+```
+
 ## Running the utility to retrieve webpages in text form given a list of URLs
 
 In the "prepare_x_list_from_URL_list_directory", suppose you have a list of URLs stored in a file "list_of_URLs.txt", one per line. Then the command:
