@@ -25,6 +25,21 @@ To use the optional "prepare_x_list_from_URL_list" utility, you also need:
 - requests
 - boilerpipe
 
+## Data Preparation
+
+In a directory (suppose for the sake of example called "input-files"), you need six files:
+
+- x_train.txt
+- y_train.txt
+- x_val.txt
+- y_val.txt
+- x_test.txt
+- y_test.txt
+
+where "train", "val", and "tests" correspond to your training, validation, and testing sets, respectively. The "x_" files contain text cases, one per line, while the "y_" files contain (corresponding by line number) either a "0" or "1" indicating the known class.
+
+Splitting your data set is somewhat of an art; I typically use 80% for training, and 10% each for validation and testing. However, this is just my habit, not a rigorous recommendation.
+
 
 
 
