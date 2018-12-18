@@ -42,6 +42,16 @@ where "train", "val", and "tests" correspond to your training, validation, and t
 
 Deciding how to split your data set is somewhat of an art; I typically use 80% for training, and 10% each for validation and testing. However, this is just my habit, not a rigorous recommendation.
 
+## Running the utility to retrieve webpages in text form given a list of URLs
+
+In the "prepare_x_list_from_URL_list_directory", suppose you have a list of URLs stored in a file "list_of_URLs.txt", one per line. Then the command:
+
+```
+python3 prepare_x_list_from_URL_list.py --url-list-file example_URL_list.txt --output-directory output --timeout 10
+```
+
+retrieves the text files and places the results in "output". 
+
 ## References
 
 1. Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014. GloVe: Global Vectors for Word Representation. https://nlp.stanford.edu/pubs/glove.pdf
