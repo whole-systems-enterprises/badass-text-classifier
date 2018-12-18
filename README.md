@@ -20,6 +20,8 @@ To train a model, and predict from it, you need:
 - TensorFlow
 - MatplotLib
 
+To use the optional GloVe embeddings [1], download the pre-trained vectors from https://nlp.stanford.edu/projects/glove/.
+
 To use the optional "prepare_x_list_from_URL_list" utility, you also need:
 
 - requests
@@ -39,6 +41,10 @@ In a directory (suppose for the sake of example called "input-files"), you need 
 where "train", "val", and "tests" correspond to your training, validation, and testing sets, respectively. The "x_" files contain text cases, one per line, while the "y_" files contain (corresponding by line number) either a "0" or "1" indicating the known class.
 
 Splitting your data set is somewhat of an art; I typically use 80% for training, and 10% each for validation and testing. However, this is just my habit, not a rigorous recommendation.
+
+## References
+
+1. Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014. GloVe: Global Vectors for Word Representation. https://nlp.stanford.edu/pubs/glove.pdf
 
 
 
