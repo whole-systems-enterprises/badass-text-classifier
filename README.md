@@ -40,7 +40,7 @@ In a directory (suppose for the sake of example called "input-files"), you need 
 
 where "train", "val", and "tests" correspond to your training, validation, and testing sets, respectively. The "x_" files contain text cases, one per line, while the "y_" files contain (corresponding by line number) either a "0" or "1" indicating the known class.
 
-Splitting your data set is somewhat of an art; I typically use 80% for training, and 10% each for validation and testing. However, this is just my habit, not a rigorous recommendation.
+Deciding how to split your data set is somewhat of an art; I typically use 80% for training, and 10% each for validation and testing. However, this is just my habit, not a rigorous recommendation.
 
 ## References
 
