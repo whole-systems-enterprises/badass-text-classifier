@@ -6,6 +6,7 @@ import numpy as np
 import os
 import pickle
 import sys
+import argparse
 
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
@@ -13,35 +14,41 @@ from keras.preprocessing.sequence import pad_sequences
 import LSTM_utilities as ut
 
 #
-# user settings
+# command line arguments
 #
-GloVe_file = '/Users/emily/Desktop/data/NLP/GloVe/glove.6B.100d.txt'
+parser = argparse.ArgumentParser(description='Create a list of texts given a list of URLs.')
+parser.add_argument('--x-to-predict-file', type=str, help='Path and name of file containing text to predict labels for, one text per line.', required=True)
+parser.add_argument('--output-file', type=str, help='File to store predicted values for y, one per line.', required=True)
+parser.add_argument('--number-of-layers', type=int, help='Number of layers in trained model.', required=True)
+parser.add_argument('--number-of-cells', type=int, help='Number of cells per layer in the trained model.', required=True)
+parser.add_argument('--model-file', type=str, help='Path and name of file containing trained model.', required=True)
+parser.add_argument('--embedding-method', type=str, help='One of "GloVe" or "learned".', required=True)
+parser.add_argument('--GloVe-file', type=str, help='Filename of GloVe file to use.')
+parser.add_argument('--max-sequence-length', type=int, help='Maximum sequence length.', required=True)
+parser.add_argument('--input-file-directory', type=str, required=True, help='Name of directory containing x_train.txt, y_train.txt, x_val.txt, y_val.txt, x_test.txt, and y_test.txt.')
+args = parser.parse_args()
 
+x_to_predict_filename = args.x_to_predict_file
+best_model = args.model_file
+number_of_layers = args.number_of_layers
+number_of_cells = args.number_of_cells
+embedding_method = args.embedding_method
+GloVe_file = args.GloVe_file
+MAX_SEQUENCE_LENGTH = args.max_sequence_length
+input_directory = args.input_file_directory
+output_filename = args.output_file
 
-output_directory = 'output_predictions'
+if embedding_method == 'GloVe' and GloVe_file == None:
+    print('You must specify the GloVe embeddings file location with --GloVe-file <filename> if you want to use the GloVe embedding method. Exiting.')
+    sys.exit(0)
 
-#best_model = 'ideological-book-corpus/best_model_so_far/best_model_so_far.hdf5'
-#best_model = 'LSTM_output_2016/checkpoints/weights/layers-1-cells-30-embedding-method-learned-model-type-lstm-weights.best.hdf5'
-best_model = 'LSTM_output_IBC_GloVe/checkpoints/weights/layers-2-cells-30-embedding-method-GloVe-model-type-lstm-weights.best.hdf5'
-
-number_of_layers = 2
-number_of_cells = 30
-embedding_method = 'GloVe'
-
-x_train_filename = 'ideological-book-corpus/output/x_train.txt'
-y_train_filename = 'ideological-book-corpus/output/y_train.txt'
-x_val_filename = 'ideological-book-corpus/output/x_val.txt'
-y_val_filename = 'ideological-book-corpus/output/y_val.txt'
-
-#x_train_filename = 'output/x_train.txt'
-#y_train_filename = 'output/y_train.txt'
-#x_val_filename = 'output/x_val.txt'
-#y_val_filename = 'output/y_val.txt'
-
-
-x_to_predict_filename = 'local_work/prepare_list_of_2018_texts/output/input.csv'
-
-MAX_SEQUENCE_LENGTH = 1000
+#
+# useful hardcoded settings
+#
+x_train_filename = input_directory + '/x_train.txt'
+y_train_filename = input_directory + '/y_train.txt'
+x_val_filename = input_directory + '/x_val.txt'
+y_val_filename = input_directory + '/y_val.txt'
 
 
 #
@@ -105,6 +112,9 @@ y_predicted = [x[0] for x in model.predict(x_to_predict)]
 #
 # save predictions
 #
-with open(output_directory + '/y_predicted.pickled', 'wb') as f:
-    pickle.dump(y_predicted, f)
+f = open(output_filename, 'w')
+for yp in y_predicted:
+    f.write(str(yp + '\n'))
+f.close()
+
 
