@@ -114,7 +114,7 @@ y_predicted = [x[0] for x in model.predict(x_to_predict)]
 #
 f = open(output_filename, 'w')
 for yp in y_predicted:
-    f.write(str(yp + '\n'))
+    f.write(str(yp) + '\n')
 f.close()
 
 
