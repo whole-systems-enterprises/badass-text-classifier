@@ -52,6 +52,14 @@ python3 LSTM_train_validate_and_test.py --output-directory output --input-file-d
 
 The resulting models will appear in the "output-<timestamp>/checkpoints/weights" directory, and ROC plots resulting from running the models on the test set will appear in the "output-<timestamp>/checkpoints/images" directory.
 
+## Making predictions
+
+Suppose you have a list, one per line, of texts you want to classify stored in a file called "x_to_predict.txt". You want the output scores written to a file "my_predictions.txt" (again, one per line). You want to use one of the models you computed using the code above, particularly the one using two layers, 30 cells per layer, and GloVe word embeddings. Your original x_train.txt, y_train.txt, x_val.txt, and y_val.txt are contained in the "input" directory. Your model was trained with a maximum sequence length of 1000. Run the following command to make the predictions:
+
+```
+python3 LSTM_predict.py --x-to-predict-file x_to_predict.txt --output-file my_predictions.txt --number-of-layers 2 --number-of-cells 30 --model-file output-2018-12-17-18-09-21.565070/checkpoints/weights/layers-2-cells-30-embedding-method-GloVe-model-type-lstm-weights.best.hdf5 --embedding-method GloVe --GloVe-file /Users/emily/Desktop/data/NLP/GloVe/glove.6B.100d.txt --max-sequence-length 1000 --input-file-directory input
+```
+
 ## Running the utility to retrieve webpages in text form given a list of URLs
 
 In the "prepare_x_list_from_URL_list_directory", suppose you have a list of URLs stored in a file "list_of_URLs.txt", one per line. Then the command:
