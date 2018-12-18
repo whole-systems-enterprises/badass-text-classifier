@@ -2,7 +2,7 @@
 
 ## A badass text classifier based on machine learning
 
-Want to classify celebrity Tweets? Scientific journal abstracts? Movie reviews? Then use this binary classifier to train a deep learning model from your labeled texts to predict labels for unknown text.
+Want to classify celebrity tweets? Scientific journal abstracts? Movie reviews? Then use this binary classifier to train a deep learning model from your labeled texts to predict labels for unknown text.
 
 ## Intense gratitude (credit where it is due)
 
