@@ -27,13 +27,13 @@ import LSTM_utilities as ut
 # x_test_filename = 'ideological-book-corpus/output/x_test.txt'
 # y_test_filename = 'ideological-book-corpus/output/y_test.txt'
 
-output_directory = 'LSTM_output_IBC_GloVe'
-x_train_filename = 'ideological-book-corpus/output/x_train.txt'
-y_train_filename = 'ideological-book-corpus/output/y_train.txt'
-x_val_filename = 'ideological-book-corpus/output/x_val.txt'
-y_val_filename = 'ideological-book-corpus/output/y_val.txt'
-x_test_filename = 'ideological-book-corpus/output/x_test.txt'
-y_test_filename = 'ideological-book-corpus/output/y_test.txt'
+#output_directory = 'LSTM_output_IBC_GloVe'
+#x_train_filename = 'ideological-book-corpus/output/x_train.txt'
+#y_train_filename = 'ideological-book-corpus/output/y_train.txt'
+#x_val_filename = 'ideological-book-corpus/output/x_val.txt'
+#y_val_filename = 'ideological-book-corpus/output/y_val.txt'
+#x_test_filename = 'ideological-book-corpus/output/x_test.txt'
+#y_test_filename = 'ideological-book-corpus/output/y_test.txt'
 
 # output_directory = 'LSTM_output_2016'
 # x_train_filename = 'output/x_train.txt'
@@ -42,6 +42,15 @@ y_test_filename = 'ideological-book-corpus/output/y_test.txt'
 # y_val_filename = 'output/y_val.txt'
 # x_test_filename = 'output/x_test.txt'
 # y_test_filename = 'output/y_test.txt'
+
+output_directory = 'LSTM_output_2016_GloVe'
+x_train_filename = 'output/x_train.txt'
+y_train_filename = 'output/y_train.txt'
+x_val_filename = 'output/x_val.txt'
+y_val_filename = 'output/y_val.txt'
+x_test_filename = 'output/x_test.txt'
+y_test_filename = 'output/y_test.txt'
+
 
 output_scores_file = 'scores.pickled'
 
@@ -58,7 +67,7 @@ embeddings_to_try = ['GloVe']
 MODEL_CP_DIR = output_directory + '/checkpoints'
 TENSORBOARD_BASE_DIR = output_directory + '/tensorboard'
 
-epochs = 10
+epochs = 100
 
 #
 # crudely clear the way

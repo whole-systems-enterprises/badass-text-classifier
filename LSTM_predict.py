@@ -15,19 +15,31 @@ import LSTM_utilities as ut
 #
 # user settings
 #
+GloVe_file = '/Users/emily/Desktop/data/NLP/GloVe/glove.6B.100d.txt'
+
+
 output_directory = 'output_predictions'
 
-best_model = 'ideological-book-corpus/best_model_so_far/best_model_so_far.hdf5'
-number_of_layers = 3
-number_of_cells = 70
-embedding_method = 'learned'
+#best_model = 'ideological-book-corpus/best_model_so_far/best_model_so_far.hdf5'
+#best_model = 'LSTM_output_2016/checkpoints/weights/layers-1-cells-30-embedding-method-learned-model-type-lstm-weights.best.hdf5'
+best_model = 'LSTM_output_IBC_GloVe/checkpoints/weights/layers-2-cells-30-embedding-method-GloVe-model-type-lstm-weights.best.hdf5'
+
+number_of_layers = 2
+number_of_cells = 30
+embedding_method = 'GloVe'
 
 x_train_filename = 'ideological-book-corpus/output/x_train.txt'
 y_train_filename = 'ideological-book-corpus/output/y_train.txt'
 x_val_filename = 'ideological-book-corpus/output/x_val.txt'
 y_val_filename = 'ideological-book-corpus/output/y_val.txt'
 
-x_to_predict_filename = 'input.csv'
+#x_train_filename = 'output/x_train.txt'
+#y_train_filename = 'output/y_train.txt'
+#x_val_filename = 'output/x_val.txt'
+#y_val_filename = 'output/y_val.txt'
+
+
+x_to_predict_filename = 'local_work/prepare_list_of_2018_texts/output/input.csv'
 
 MAX_SEQUENCE_LENGTH = 1000
 
