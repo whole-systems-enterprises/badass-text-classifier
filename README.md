@@ -47,7 +47,7 @@ Deciding how to split your data set is somewhat of an art; I typically use 80% f
 In the "prepare_x_list_from_URL_list_directory", suppose you have a list of URLs stored in a file "list_of_URLs.txt", one per line. Then the command:
 
 ```
-python3 prepare_x_list_from_URL_list.py --url-list-file example_URL_list.txt --output-directory output --timeout 10
+python3 prepare_x_list_from_URL_list.py --url-list-file list_of_URLs.txt --output-directory output --timeout 10
 ```
 
 retrieves the text files and places the results in "output". 
