@@ -113,7 +113,9 @@ word_index = tokenizer.word_index
 #
 # iterate through the embedding methods
 #
+score_results = {}
 for embedding_method in embeddings_to_try:
+    score_results[embedding_method] = {}
 
     #
     # create embeddings layer
@@ -131,14 +133,14 @@ for embedding_method in embeddings_to_try:
     #
     # iterate through the layers
     #
-    score_results = {}
+
     for number_of_layers in layers:
 
-        score_results[number_of_layers] = {}
+        score_results[embedding_method][number_of_layers] = {}
 
         for number_of_cells in number_of_cells_to_try:
 
-            score_results[number_of_layers][number_of_cells] = None
+            score_results[embedding_method][number_of_layers][number_of_cells] = None
 
             #
             # initialize model
@@ -161,7 +163,7 @@ for embedding_method in embeddings_to_try:
             # test
             #
             scores = model.evaluate(x_test, y_test, verbose=1)
-            score_results[number_of_layers][number_of_cells] = {
+            score_results[embedding_method][number_of_layers][number_of_cells] = {
                 'scores' : scores,
                 'results_file' : results_file,
                 'ROC' : roc_filename,
