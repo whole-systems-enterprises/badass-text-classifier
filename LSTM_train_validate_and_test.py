@@ -6,6 +6,8 @@ import numpy as np
 import os
 import pickle
 import sys
+import argparse
+import datetime
 
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
@@ -16,63 +18,59 @@ from keras.preprocessing.sequence import pad_sequences
 import LSTM_utilities as ut
 
 #
-# user settings
+# get current date and time
 #
+timestamp = str(datetime.datetime.now()).replace(' ', '-').replace(':', '-')
 
-# output_directory = 'LSTM_output_IBC'
-# x_train_filename = 'ideological-book-corpus/output/x_train.txt'
-# y_train_filename = 'ideological-book-corpus/output/y_train.txt'
-# x_val_filename = 'ideological-book-corpus/output/x_val.txt'
-# y_val_filename = 'ideological-book-corpus/output/y_val.txt'
-# x_test_filename = 'ideological-book-corpus/output/x_test.txt'
-# y_test_filename = 'ideological-book-corpus/output/y_test.txt'
+#
+# parse command line arguments
+#
+parser = argparse.ArgumentParser(description='Create a list of texts given a list of URLs.')
+parser.add_argument('--output-directory', type=str, required=True, help='Name of directory to place output (will be erased/created).')
+parser.add_argument('--input-file-directory', type=str, required=True, help='Name of directory containing x_train.txt, y_train.txt, x_val.txt, y_val.txt, x_test.txt, and y_test.txt.')
+parser.add_argument('--GloVe-file', type=str, help='Filename of GloVe file to use.')
+parser.add_argument('--max-sequence-length', type=int, help='Maximum sequence length.', required=True)
+parser.add_argument('--number-of-layers-to-try', type=str, help='Comma-delimited list of number of layers to try, e.g. 1,2,3.', required=True)
+parser.add_argument('--number-of-cells-to-try', type=str, help='Comma-delimited list of number of cells to try per layer, e.g. 10,15,30,70,128,200.', required=True)
+parser.add_argument('--epochs', type=int, help='Number of epochs to use for gradient descent.', required=True)
+parser.add_argument('--embeddings-to-try', type=str, help='One of [learned], [GloVe], or [learned,GloVe], e.g. --embeddings-to-try learned,GloVe', required=True)
 
-#output_directory = 'LSTM_output_IBC_GloVe'
-#x_train_filename = 'ideological-book-corpus/output/x_train.txt'
-#y_train_filename = 'ideological-book-corpus/output/y_train.txt'
-#x_val_filename = 'ideological-book-corpus/output/x_val.txt'
-#y_val_filename = 'ideological-book-corpus/output/y_val.txt'
-#x_test_filename = 'ideological-book-corpus/output/x_test.txt'
-#y_test_filename = 'ideological-book-corpus/output/y_test.txt'
+args = parser.parse_args()
 
-# output_directory = 'LSTM_output_2016'
-# x_train_filename = 'output/x_train.txt'
-# y_train_filename = 'output/y_train.txt'
-# x_val_filename = 'output/x_val.txt'
-# y_val_filename = 'output/y_val.txt'
-# x_test_filename = 'output/x_test.txt'
-# y_test_filename = 'output/y_test.txt'
+output_directory = args.output_directory + '-' + timestamp
+input_directory = args.input_file_directory
+GloVe_file = args.GloVe_file  #'/Users/emily/Desktop/data/NLP/GloVe/glove.6B.100d.txt'
+MAX_SEQUENCE_LENGTH = args.max_sequence_length
+layers = [int(x) for x in args.number_of_layers_to_try.split(',')]
+number_of_cells_to_try = [int(x) for x in args.number_of_cells_to_try.split(',')]
+epochs = args.epochs
 
-output_directory = 'LSTM_output_2016_GloVe'
-x_train_filename = 'output/x_train.txt'
-y_train_filename = 'output/y_train.txt'
-x_val_filename = 'output/x_val.txt'
-y_val_filename = 'output/y_val.txt'
-x_test_filename = 'output/x_test.txt'
-y_test_filename = 'output/y_test.txt'
+embeddings_to_try = args.embeddings_to_try.split(',')
 
+if 'GloVe' in embeddings_to_try and GloVe_file == None:
+    print('You must specify --GloVe-file <filename> if you intend to use the GloVe embeddings. Exiting.')
+    sys.exit(-1)
+
+#
+# useful hardcoded settings
+#
+x_train_filename = input_directory + '/x_train.txt'
+y_train_filename = input_directory + '/y_train.txt'
+x_val_filename = input_directory + '/x_val.txt'
+y_val_filename = input_directory + '/y_val.txt'
+x_test_filename = input_directory + '/x_test.txt'
+y_test_filename = input_directory + '/y_test.txt'
 
 output_scores_file = 'scores.pickled'
-
-GloVe_file = '/Users/emily/Desktop/data/NLP/GloVe/glove.6B.100d.txt'
-MAX_SEQUENCE_LENGTH = 1000
-
-layers = [1, 2, 3]
-number_of_cells_to_try = [10, 15, 30, 70, 128, 200]
-
-#embeddings_to_try = ['learned']
-embeddings_to_try = ['GloVe']
-
 
 MODEL_CP_DIR = output_directory + '/checkpoints'
 TENSORBOARD_BASE_DIR = output_directory + '/tensorboard'
 
-epochs = 100
-
 #
-# crudely clear the way
+# erase and create the output directory
 #
-os.system('rm -R ' + output_directory)
+if os.path.isdir(output_directory):
+    os.system('rm -R ' + output_directory)
 os.system('mkdir ' + output_directory)
 os.system('mkdir ' + MODEL_CP_DIR)
 os.system('mkdir ' + MODEL_CP_DIR + '/weights')
