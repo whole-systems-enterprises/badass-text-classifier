@@ -44,9 +44,13 @@ Deciding how to split your data set is somewhat of an art; I typically use 80% f
 
 ## Training
 
+Suppose you have the above prepared files contained in a subdirectory called "input", and that you want to write all output to a subdirectory called "output-<timestamp>". Furthermore, suppose you want to use a maximum sequence length of 1000, to try between one and three layers, and [10, 15, 30, 70, 128, and 200] cells per layer. Finally, suppose you want to use both the GloVe word embeddings index and a word embeddings index learned from the data, and to run the gradient descent over 100 epochs. The following command will deliver these results:
+
 ```
 python3 LSTM_train_validate_and_test.py --output-directory output --input-file-directory input --max-sequence-length 1000 --number-of-layers-to-try 1,2,3 --number-of-cells-to-try 10,15,30,70,128,200 --epochs 100 --embeddings-to-try learned,GloVe --GloVe-file /Users/emily/Desktop/data/NLP/GloVe/glove.6B.100d.txt
 ```
+
+The resulting models will appear in the "output-<timestamp>/checkpoints/weights" directory, and ROC plots resulting from running the models on the test set will appear in the "output-<timestamp>/checkpoints/images" directory.
 
 ## Running the utility to retrieve webpages in text form given a list of URLs
 
